@@ -20,11 +20,12 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "ubuntu" {
   # update-demo
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = var.instance_type
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
 
   tags = {
-    Name = var.instance_name
+    Name      = var.instance_name
+    yor_trace = "602a05f2-0be1-4d33-ba68-1de7d096f00a"
   }
 }
 
@@ -44,6 +45,9 @@ resource "aws_security_group" "demo-sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    yor_trace = "a4d651c0-c6d5-471f-bb9e-905d32cd5fdd"
   }
 }
 
@@ -65,4 +69,7 @@ resource "aws_iam_role" "iam_role" {
   ]
 }
 EOF
+  tags = {
+    yor_trace = "a82ca9b2-5460-4a9f-9d35-a4ba885786b6"
+  }
 }
